@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailwind Learn</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body class="bg-gray-950">
+    <nav
+      class="fixed bg-gray-950 z-10 top-0 flex w-full h-14 justify-between items-center px-4"
+    >
+      <div class="flex items-center gap-x-4">
+        <button class="bg-default">
+          <img src="./assets/icons/menu.svg" alt="" class="w-6" />
+        </button>
+        <h3 class="text-slate-100 text-xl">Youtube</h3>
+      </div>
+      <div class="pl-24 basis-[55%] flex items-center">
+        <input
+          type="search"
+          class="bg-gray-950 text-slate-100 py-2 pl-4 rounded-l-full w-[75%] border border-zinc-800"
+          placeholder="Telusuri"
+        />
+        <button
+          class="rounded-r-full bg-zinc-800 py-[11px] px-5 borded border-zinc-800"
+        >
+          <img src="./assets/icons/search.svg" class="w-5" />
+        </button>
+        <button
+          class="p-2 bg-white bg-opacity-10 rounded-full hover:bg-default ml-4"
+        >
+          <img src="./assets/icons/mic.svg" class="w-5" alt="" />
+        </button>
+      </div>
+      <div class="flex items-center space-x-4">
+        <img src="./assets/icons/ellipse.svg" class="w-6 cursor-pointer" />
+        <button
+          class="flex items-center border-2 border-zinc-800 py-1 px-2 rounded-full hover:bg-sky-600 hover:bg-opacity-40"
+        >
+          <img src="./assets/icons/user.svg" class="w-6 text-sky-600" alt="" />
+          <span class="text-sky-600 pl-2 text-sm font-semibold">Sign In</span>
+        </button>
+      </div>
+    </nav>
+    <main class="pt-14 flex">
+      <aside
+        class="w-56 bg-grey-950 max-h-full overflow-y-auto p-3 fixed top-14 z-10"
+      >
+        <ul class="mb-3">
+          <li>
+            <a href="#" class="flex gap-x-6 px-3 py-2 active-link">
+              <img src="./assets/icons/home.svg" class="w-6" alt="" />
+              <span class="text-slate-100">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex gap-x-6 px-3 py-2">
+              <img src="./assets/icons/home.svg" class="w-6" alt="" />
+              <span class="text-slate-100">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex gap-x-6 px-3 py-2">
+              <img src="./assets/icons/home.svg" class="w-6" alt="" />
+              <span class="text-slate-100">Home</span>
+            </a>
+          </li>
+        </ul>
+        <div class="border border-zinc-800"></div>
+      </aside>
+      <div class="basis-full bg-red-300 ml-56">
+        <div class="fixed w-full bg-gray-950 p-3">
+          <div class="absolute right-[229px] bg-gray-950 w-14">
+            <button class="rounded-full p-2 hover:bg-white hover:bg-opacity-20">
+              <img src="./assets/icons/right.svg" class="w-5" alt="" />
+            </button>
+          </div>
+          <div class="flex pl-8 gap-x-4">
+            <button
+              class="bg-white text-gray-800 py-[6px] text-sm px-3 rounded-lg"
+            >
+              Semua
+            </button>
+            <button
+              class="bg-white font-semibold bg-opacity-10 whitespace-nowrap hover:bg-opacity-20 text-slate-100 py-[6px] text-sm px-3 rounded-lg"
+            >
+              Game
+            </button>
+            <button
+              class="bg-white font-semibold bg-opacity-10 whitespace-nowrap hover:bg-opacity-20 text-slate-100 py-[6px] text-sm px-3 rounded-lg"
+            >
+              Live
+            </button>
+            <button
+              class="bg-white font-semibold bg-opacity-10 whitespace-nowrap hover:bg-opacity-20 text-slate-100 py-[6px] text-sm px-3 rounded-lg"
+            >
+              Mix
+            </button>
+            <button
+              class="bg-white font-semibold bg-opacity-10 whitespace-nowrap hover:bg-opacity-20 text-slate-100 py-[6px] text-sm px-3 rounded-lg"
+            >
+              Musik
+            </button>
+            <button
+              class="bg-white font-semibold bg-opacity-10 whitespace-nowrap hover:bg-opacity-20 text-slate-100 py-[6px] text-sm px-3 rounded-lg"
+            >
+              Pokemon
+            </button>
+            <button
+              class="bg-white font-semibold bg-opacity-10 whitespace-nowrap hover:bg-opacity-20 text-slate-100 py-[6px] text-sm px-3 rounded-lg"
+            >
+              Mobile Legend Bang Bang
+            </button>
+            <button
+              class="bg-white font-semibold bg-opacity-10 whitespace-nowrap hover:bg-opacity-20 text-slate-100 py-[6px] text-sm px-3 rounded-lg"
+            >
+              Game Petualangan Aksi
+            </button>
+            <button
+              class="bg-white font-semibold bg-opacity-10 whitespace-nowrap hover:bg-opacity-20 text-slate-100 py-[6px] text-sm px-3 rounded-lg"
+            >
+              Kartun
+            </button>
+            <button
+              class="bg-white font-semibold bg-opacity-10 whitespace-nowrap hover:bg-opacity-20 text-slate-100 py-[6px] text-sm px-3 rounded-lg"
+            >
+              Baru diupload
+            </button>
+            <button
+              class="bg-white font-semibold bg-opacity-10 whitespace-nowrap hover:bg-opacity-20 text-slate-100 py-[6px] text-sm px-3 rounded-lg"
+            >
+              Baru ditonton
+            </button>
+            <button
+              class="bg-white font-semibold bg-opacity-10 whitespace-nowrap hover:bg-opacity-20 text-slate-100 py-[6px] text-sm px-3 rounded-lg"
+            >
+              Baru untuk anda
+            </button>
+          </div>
+        </div>
+        <div></div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .bg-default {
+        @apply p-2 hover:bg-white hover:bg-opacity-20 hover:rounded-full
+    }
+    .active-link {
+       @apply bg-zinc-700 bg-opacity-60 rounded-lg hover:bg-opacity-80 hover:bg-zinc-600
+    }
+}

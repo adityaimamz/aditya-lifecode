@@ -1,0 +1,23 @@
+p#one {
+    text-shadow: 1px 1px 0px #000000;
+    background-color: #eeeeee;
+    color: #666666;
+ }
+  
+ p#two {
+    text-shadow: 1px 1px 3px #666666;
+    background-color: #dddddd;
+    color: #666666;
+ }
+  
+ p#three {
+    text-shadow: 2px 2px 7px #111111;
+    background-color: #cccccc;
+    color: #ffffff;
+ }
+  
+ p#four {
+    text-shadow: -1px -1px #666666;
+    background-color: #cccccc;
+    color: #bbbbbb;
+ }
