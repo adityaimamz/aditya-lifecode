@@ -7,6 +7,7 @@ const Input = (props) => {
               type={type}
               name={name}
               placeholder={placeholder}
+              id={name}
               className="border rounded w-full py-2 px-3 text-gray-700 leading-tight"
             />
     )
