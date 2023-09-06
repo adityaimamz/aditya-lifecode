@@ -1,6 +1,5 @@
+/* eslint-disable react/prop-types */
  const Button = (props) => {
-  //destructuring
-  // eslint-disable-next-line react/prop-types
   const { variant = "bg-sky-600", children = "..." } = props;
   return (
     <button

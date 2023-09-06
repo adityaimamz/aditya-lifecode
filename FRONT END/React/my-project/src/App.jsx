@@ -1,12 +1,11 @@
-import Button from "./components/Elements/Button/button.jsx"; 
+// import LoginPage from "./Pages/login";
+import RegisterPage from "./Pages/register";
+
 function App() {
   return (
-    <div className="flex justify-center bg-blue-600 min-h-screen font-bold items-center">
-      <div className="flex gap-4">
-        <Button variant="bg-red-600">Register</Button>
-        <Button variant="bg-slate-500">Login</Button>
-        <Button ></Button>
-      </div>
+    <div className="flex justify-center min-h-screen font-bold items-center">
+      {/* <LoginPage></LoginPage> */}
+      <RegisterPage/>
     </div>
   );
 }
