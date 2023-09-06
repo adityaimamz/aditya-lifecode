@@ -1,18 +1,4 @@
-
-const Button = (props) => {
-  //destructuring
-  // eslint-disable-next-line react/prop-types
-  const { variant = "bg-sky-600" , children = "..." } = props;
-
-  return (
-    <button
-      className={`h-10 px-6 font-semibold rounded-md ${variant} text-white`}
-    >
-      {children}
-    </button>
-  );
-};
-
+import Button from "./components/Elements/Button/button.jsx"; 
 function App() {
   return (
     <div className="flex justify-center bg-blue-600 min-h-screen font-bold items-center">
