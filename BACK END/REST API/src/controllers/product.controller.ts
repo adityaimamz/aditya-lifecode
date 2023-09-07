@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { type Request, type Response } from 'express'
 import { logger } from '../utils/logger'
-import { createProductValidation } from '../validation/product.validation'
+import { createProductValidation } from '../validations/product.validation'
 import { getProductFromDB } from '../services/product.service'
 
 interface ProductType {
