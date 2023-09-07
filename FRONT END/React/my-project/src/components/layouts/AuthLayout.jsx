@@ -20,7 +20,7 @@ const AuthLayout = (props) => {
    if (type === "login"){
      return (
        <p className="text-sm mt-4 font-medium text-center">
-         Don't have an account ?&nbsp; 
+         Dont have an account ?&nbsp;
          <Link to="/register" className="text-blue-500">
            Sign Up
          </Link>
