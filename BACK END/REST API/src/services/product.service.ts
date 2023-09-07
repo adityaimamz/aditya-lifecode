@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import productModel from '../models/product.model'
+import { logger } from '../utils/logger'
 
 export const getProductFromDB = async () => {
   productModel
     .find()
     .then((data) => {
-      console.log(data)
+      return data
     })
     .catch((error) => {
-      console.log(error)
+      logger.info('Cannot get data from DB')
+      logger.error(error)
     })
 }
