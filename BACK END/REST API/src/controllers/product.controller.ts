@@ -3,7 +3,8 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { type Request, type Response } from 'express'
 import { logger } from '../utils/logger'
-import { createProductValidation } from '../validations/product.validation'
+import { createProductValidation } from '../validation/product.validation'
+import { getProductFromDB } from '../services/product.service'
 
 export const createProduct = (req: Request, res: Response) => {
   const { error, value } = createProductValidation(req.body)
@@ -14,35 +15,27 @@ export const createProduct = (req: Request, res: Response) => {
   logger.info('Succes add new product data')
   return res.status(200).send({ status: true, statusCode: '200', message: 'Succes add new product', data: value })
 }
-export const getProduct = (req: Request, res: Response) => {
-  const products = [
-    {
-      name: 'Sepatu Sport',
-      price: 50000
-    },
-    {
-      name: 'Sepatu Casual',
-      price: 20000
-    }
-  ]
-  const {
-    params: { name }
-  } = req
+export const getProduct = async (req: Request, res: Response) => {
+  const products = await getProductFromDB()
 
-  if (name) {
-    const filterProduct = products.filter((product) => {
-      if (product.name === name) {
-        return product
-      }
-    })
-    if (filterProduct.length === 0) {
-      logger.info('Data Not Found')
-      res.status(404).send({ status: false, statusCode: 404, data: {} })
-    }
-    logger.info('Succes get product data')
-    res.status(200).send({ status: true, statusCode: 200, data: filterProduct[0] })
-  }
+  // const {
+  //   params: { name }
+  // } = req
 
-  logger.info('Succes get product data')
-  res.status(200).send({ status: true, statusCode: 200, data: products })
+  // if (name) {
+  //   const filterProduct = products.filter((product) => {
+  //     if (product.name === name) {
+  //       return product
+  //     }
+  //   })
+  //   if (filterProduct.length === 0) {
+  //     logger.info('Data Not Found')
+  //     res.status(404).send({ status: false, statusCode: 404, data: {} })
+  //   }
+  //   logger.info('Succes get product data')
+  //   res.status(200).send({ status: true, statusCode: 200, data: filterProduct[0] })
+  // }
+
+  // logger.info('Succes get product data')
+  // res.status(200).send({ status: true, statusCode: 200, data: products })
 }
