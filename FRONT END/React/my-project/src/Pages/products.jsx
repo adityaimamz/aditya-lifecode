@@ -1,5 +1,5 @@
 import CardProduct from "../components/Fragments/CardProduct";
-import { useEffect, useState } from "react"; // Perhatikan perubahan ini
+import { useEffect, useState, useRef } from "react"; // Perhatikan perubahan ini
 
 const products = [
   {
@@ -67,6 +67,24 @@ const ProductPage = () => {
     }
   };
 
+  // UseRef
+  // const cartRef = useRef(JSON.parse(localStorage.getItem("cart")) || []);
+  // const handleAddToCartRef = (id) => {
+  //   cartRef.current = [...cartRef.current, { id, qty: 1 }];
+  //   localStorage.setItem("cart", JSON.stringify(cartRef.current));
+  // }
+
+  const totalPriceRef = useRef(null);
+
+  useEffect(() => {
+    if(cart.length > 0) {
+      totalPriceRef.current.style.display = "table-row";
+    } else {
+      totalPriceRef.current.style.display = "none";
+    }
+  }, [cart]);
+
+
   return (
     <>
       <div className="flex justify-end h-15 bg-blue-600 text-white items-center px-10">
@@ -130,7 +148,7 @@ const ProductPage = () => {
                   </tr>
                 );
               })}
-              <tr>
+              <tr ref={totalPriceRef}> 
                 <td colSpan={3}>Total</td>
                 <td>
                   {totalPrice.toLocaleString("id-ID", {
