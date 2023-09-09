@@ -1,5 +1,5 @@
 import CardProduct from "../components/Fragments/CardProduct";
-import { useState } from "react"; // Perhatikan perubahan ini
+import { useEffect, useState } from "react"; // Perhatikan perubahan ini
 
 const products = [
   {
@@ -32,12 +32,22 @@ const email = localStorage.getItem("email");
 
 const ProductPage = () => {
   // Gunakan useState sebagai fungsi, bukan objek
-  const [cart, setCart] = useState([
-    {
-      id: 1,
-      qty: 1,
-    },
-  ]);
+  const [cart, setCart] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem("cart")) || []);
+  }, []);
+
+  useEffect(() => {
+   if(cart.length > 0) {
+     const sum = cart.reduce((acc, item) => {
+       const product = products.find((product) => product.id === item.id);
+       return acc + product.price * item.qty;
+     }, 0);
+     setTotalPrice(sum);
+     localStorage.setItem("cart", JSON.stringify(cart));
+   }
+  }, [cart]);
 
   const handleLogout = () => {
     localStorage.removeItem("email");
@@ -48,9 +58,10 @@ const ProductPage = () => {
   const HandleAddToCart = (id) => {
     if (cart.find((item) => item.id === id)) {
       setCart(
-        cart.map(item =>
-          item.id === id ? { ...item, qty: item.qty + 1 } : item)
-      )
+        cart.map((item) =>
+          item.id === id ? { ...item, qty: item.qty + 1 } : item
+        )
+      );
     } else {
       setCart([...cart, { id, qty: 1 }]);
     }
@@ -110,7 +121,7 @@ const ProductPage = () => {
                     </td>
                     <td>{item.qty}</td>
                     <td>
-                      Rp{" "}
+                      
                       {(product.price * item.qty).toLocaleString("id-ID", {
                         style: "currency",
                         currency: "IDR",
@@ -119,6 +130,15 @@ const ProductPage = () => {
                   </tr>
                 );
               })}
+              <tr>
+                <td colSpan={3}>Total</td>
+                <td>
+                  {totalPrice.toLocaleString("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                  })}
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
