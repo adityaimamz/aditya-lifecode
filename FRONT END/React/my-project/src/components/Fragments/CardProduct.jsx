@@ -12,7 +12,7 @@ const Header = (props) => {
   const { image } = props;
   return (
     <a href="#">
-      <img src={image} alt="product" className="p-8 rounded-t-lg" />
+      <img src={image} alt="product" className="p-8 rounded-t-lg h-60 w-full object-cover" />
     </a>
   );
 };
@@ -22,10 +22,10 @@ const Body = (props) => {
   return (
     <div className="px-5 pb-5 h-full">
       <a href="">
-        <h5 className="text-xl font-semibold tracking-tight text-white ">
+        <h5 className="text-xl font-semibold tracking-tight text-white line-clamp-1 ">
           {title}
         </h5>
-        <p className="text-white">{children}</p>
+        <p className="text-white line-clamp-3">{children}</p>
       </a>
     </div>
   );
@@ -36,7 +36,7 @@ const Footer = (props) => {
   return (
     <div className="flex items-center justify-between px-5 pb-3 ">
       <span className="text-xl font-bold text-white">
-        {price.toLocaleString("id-ID", { style: "currency", currency: "IDR" })}
+        {price.toLocaleString("id-ID", { style: "currency", currency: "USD" })}
       </span>
       <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
       onClick={() => hadleAddToCard(id)}>
