@@ -1,7 +1,7 @@
 import CardProduct from "../components/Fragments/CardProduct";
 import { useEffect, useState, useRef } from "react"; // Perhatikan perubahan ini
 import { getProduct } from "../services/product.service";
-import { getUsename } from "../services/auth.service";
+import { useLogin } from "../hooks/useLogin";
 
 // const products = [
 //   {
@@ -30,25 +30,14 @@ import { getUsename } from "../services/auth.service";
 //   },
 // ];
 
-
 const ProductPage = () => {
   // Gunakan useState sebagai fungsi, bukan objek
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
-  const [username, setUsername] = useState("");
-
+  const username = useLogin();
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem("cart")) || []);
-  }, []);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-    setUsername(getUsename(token));
-    } else {
-      window.location.href = "/login";
-    }
   }, []);
 
   useEffect(() => {
@@ -58,8 +47,7 @@ const ProductPage = () => {
   }, []);
 
   useEffect(() => {
-    if (products.length > 0 && 
-      cart.length > 0) {
+    if (products.length > 0 && cart.length > 0) {
       const sum = cart.reduce((acc, item) => {
         const product = products.find((product) => product.id === item.id);
         return acc + product.price * item.qty;
@@ -151,7 +139,7 @@ const ProductPage = () => {
                   );
                   return (
                     <tr key={item.id}>
-                      <td>{product.title.substring(0,10)}...</td>
+                      <td>{product.title.substring(0, 10)}...</td>
                       <td>
                         {product.price.toLocaleString("id-ID", {
                           style: "currency",
