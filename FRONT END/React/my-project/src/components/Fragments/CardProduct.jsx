@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/slices/cartSlice";
 
 /* eslint-disable react/prop-types */
 const CardProduct = (props) => {
@@ -14,7 +16,11 @@ const Header = (props) => {
   const { image, id } = props;
   return (
     <Link to={`/product/${id}`}>
-      <img src={image} alt="product" className="p-8 rounded-t-lg h-60 w-full object-cover" />
+      <img
+        src={image}
+        alt="product"
+        className="p-8 rounded-t-lg h-60 w-full object-cover"
+      />
     </Link>
   );
 };
@@ -34,14 +40,17 @@ const Body = (props) => {
 };
 
 const Footer = (props) => {
-  const { price, hadleAddToCard, id } = props;
+  const { price, id } = props;
+  const dispatch = useDispatch();
   return (
     <div className="flex items-center justify-between px-5 pb-3 ">
       <span className="text-xl font-bold text-white">
         {price.toLocaleString("id-ID", { style: "currency", currency: "USD" })}
       </span>
-      <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-      onClick={() => hadleAddToCard(id)}>
+      <button
+        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        onClick={() => dispatch(addToCart({ id, qty: 1 }))}
+      >
         Add to Cart
       </button>
     </div>
