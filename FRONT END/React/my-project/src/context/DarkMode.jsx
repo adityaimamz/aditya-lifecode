@@ -5,7 +5,7 @@ const DarkModeContext = createContext();
 
 const DarkModeProvider = ({ children }) => {
   // Tambahkan { children } sebagai prop
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   return (
     <DarkModeContext.Provider value={{ isDarkMode, setIsDarkMode }}>
       {children}
