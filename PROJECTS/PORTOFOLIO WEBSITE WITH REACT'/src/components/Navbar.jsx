@@ -10,6 +10,7 @@ import { logo, menu, close } from "../assets";
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   return (
     <nav
       className={`${styles.paddingX} w-full flex bg-primary py-5 items-center fixed top-0 z-20`}
