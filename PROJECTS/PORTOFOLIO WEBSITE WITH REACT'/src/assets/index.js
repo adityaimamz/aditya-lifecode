@@ -25,6 +25,9 @@ import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
 import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
+import dicoding from "./company/dicoding.jpeg";
+import stp from "./company/stp.png";
+import persagi from "./company/persagi.png";
 
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
@@ -56,6 +59,9 @@ export {
   shopify,
   starbucks,
   tesla,
+  dicoding,
+  stp,
+  persagi,
   carrent,
   jobit,
   tripguide,
