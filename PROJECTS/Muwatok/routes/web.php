@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +27,12 @@ Route::get('/detail', function () {
 Route::get('/admin', function () {
     return view('admin.dashboard');
 });
+
+Route::get('/artikel', function () {
+    return view('admin.article');
+});
+
+
+Route::get('/login',[LoginController::class,'index'])->name('login');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

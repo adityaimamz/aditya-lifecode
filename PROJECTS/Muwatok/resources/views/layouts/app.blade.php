@@ -53,8 +53,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="index.html" class="nav-item nav-link">Home</a>
-                    <a href="about.html" class="nav-item nav-link active">About</a>
+                    <a href="/" class="nav-item nav-link">Home</a>
+                    <a href="/" class="nav-item nav-link active">Blog</a>
                 </div>
             </div>
         </nav>
@@ -63,7 +63,7 @@
     @yield('content')
 
 
-    <!-- Footer Start -->
+    {{-- <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light mt-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row gx-5">
@@ -173,7 +173,7 @@
             </div>
         </div>
     </div>
-    <!-- Footer End -->
+    <!-- Footer End --> --}}
 
 
     <!-- Back to Top -->
