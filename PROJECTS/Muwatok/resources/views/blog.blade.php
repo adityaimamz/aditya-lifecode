@@ -22,7 +22,7 @@
                             <div class="col-md-4 wow slideInUp" data-wow-delay="0.1s">
                                 <div class="blog-item bg-light rounded overflow-hidden">
                                     <div class="blog-img position-relative overflow-hidden">
-                                        <img class="img-fluid" src="{{ asset('img/blog-2.jpg') }}" alt="">
+                                        <img class="img-fluid" src="{{ Storage::url($article->gambar) }}" alt="">
                                         {{-- <a class="position-absolute top-0 start-0 bg-primary text-white rounded-end mt-5 py-2 px-4"
                                             href="">{{ $article->judul }}</a> --}}
                                     </div>
@@ -45,16 +45,26 @@
                         <div class="col-12 wow slideInUp" data-wow-delay="0.1s">
                             <nav aria-label="Page navigation">
                                 <ul class="pagination pagination-lg m-0">
-                                    <li class="page-item disabled">
-                                        <a class="page-link rounded-0" href="#" aria-label="Previous">
+                                    <!-- Tombol Previous -->
+                                    <li class="page-item {{ $articles->currentPage() == 1 ? 'disabled' : '' }}">
+                                        <a class="page-link rounded-0" href="{{ $articles->previousPageUrl() }}"
+                                            aria-label="Previous">
                                             <span aria-hidden="true"><i class="bi bi-arrow-left"></i></span>
                                         </a>
                                     </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link rounded-0" href="#" aria-label="Next">
+
+                                    <!-- Menampilkan nomor halaman -->
+                                    @for ($i = 1; $i <= $articles->lastPage(); $i++)
+                                        <li class="page-item {{ $articles->currentPage() == $i ? 'active' : '' }}">
+                                            <a class="page-link" href="{{ $articles->url($i) }}">{{ $i }}</a>
+                                        </li>
+                                    @endfor
+
+                                    <!-- Tombol Next -->
+                                    <li
+                                        class="page-item {{ $articles->currentPage() == $articles->lastPage() ? 'disabled' : '' }}">
+                                        <a class="page-link rounded-0" href="{{ $articles->nextPageUrl() }}"
+                                            aria-label="Next">
                                             <span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
                                         </a>
                                     </li>

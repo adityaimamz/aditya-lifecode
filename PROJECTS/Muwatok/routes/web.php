@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\auth\LoginController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\articleController;
-use App\Http\Controllers\BlogController;
+use App\Http\Controllers\auth\LoginController;
 use App\Models\article;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +19,7 @@ use App\Models\article;
 // Route::get('/', [BlogController::class, 'index']);
 
 Route::get('/', function () {
-    $articles = article::all();
+    $articles = Article::paginate(1); // Mengambil 10 item per halaman
     return view('blog', ['articles' => $articles]);
 });
 
@@ -29,11 +28,9 @@ Route::get('/detail/{slug}', function ($slug) {
     $articles = article::all();
     return view('detail-article', [
         'article' => $article,
-        
+        'articles' => $articles,
     ]);
 });
-
-
 
 Route::get('/detail', function () {
     return view('detail-article');

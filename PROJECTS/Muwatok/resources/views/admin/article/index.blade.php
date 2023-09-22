@@ -47,6 +47,7 @@
                                         <th scope="row">{{ $loop->iteration }}</td>
                                         <td>
                                             <img src="{{ Storage::url($d->gambar) }}" alt="" width="50px">
+                                            {{-- {{ $d->gambar }} --}}
                                         </td>
                                         <td>{{ $d->judul }}</td>
                                         <td>{{ \Carbon\Carbon::parse($d->created_at)->format('D, d M Y') }}</td>
@@ -60,13 +61,15 @@
                                                     <a class="dropdown-item" href="{{ route('article.show', $d->slug) }}"><i
                                                             class="dw dw-eye"></i>
                                                         View</a>
-                                                    <a class="dropdown-item" href="{{ route('article.edit', $d->id) }}"><i class="dw dw-edit2"></i>
+                                                    <a class="dropdown-item" href="{{ route('article.edit', $d->id) }}"><i
+                                                            class="dw dw-edit2"></i>
                                                         Edit</a>
                                                     <form action="{{ route('article.destroy', $d->id) }}" method="POST">
                                                         @method('DELETE')
                                                         @csrf
-														<button type="submit" class="dropdown-item"><i class="dw dw-delete-3"></i>
-                                                        Delete</button>
+                                                        <button type="submit" class="dropdown-item"><i
+                                                                class="dw dw-delete-3"></i>
+                                                            Delete</button>
                                                     </form>
 
                                                 </div>
