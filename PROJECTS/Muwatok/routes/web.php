@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\auth\LoginController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\articleController;
+use App\Http\Controllers\BlogController;
+use App\Models\article;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,24 +17,39 @@ use App\Http\Controllers\auth\LoginController;
 |
  */
 
+// Route::get('/', [BlogController::class, 'index']);
+
 Route::get('/', function () {
-    return view('blog');
+    $articles = article::all();
+    return view('blog', ['articles' => $articles]);
 });
+
+Route::get('/detail/{slug}', function ($slug) {
+    $article = article::where('slug', $slug)->first();
+    $articles = article::all();
+    return view('detail-article', [
+        'article' => $article,
+        
+    ]);
+});
+
+
 
 Route::get('/detail', function () {
     return view('detail-article');
 });
 
-
-Route::get('/admin', function () {
-    return view('admin.dashboard');
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    });
+    Route::resource('article', articleController::class);
 });
 
-Route::get('/artikel', function () {
-    return view('admin.article');
-});
-
-
-Route::get('/login',[LoginController::class,'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('/test', function () {
+    return view('admin.test');
+});

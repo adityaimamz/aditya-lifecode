@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Admin CBU Sites</title>
 
     <!-- Fonts -->
     <!DOCTYPE html>
@@ -14,7 +14,7 @@
     <head>
         <!-- Basic Page Info -->
         <meta charset="utf-8" />
-        <title>DeskApp - Bootstrap Admin Dashboard HTML Template</title>
+        <title>Admin CBU Sites</title>
 
         <!-- Site favicon -->
         <link rel="apple-touch-icon" sizes="180x180"
@@ -78,7 +78,7 @@
             <div class="user-info-dropdown mr-4 mt-3">
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                        <span class="user-name ">Admin</span>
+                        <span class="user-name ">{{ Auth::user()->name }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list ">
                         <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
@@ -106,28 +106,17 @@
         <div class="menu-block customscroll">
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle">
-                            <span class="micon bi bi-house"></span><span class="mtext">Web Settings</span>
+                    <li>
+                        <a href="/admin" class="dropdown-toggle no-arrow">
+                            <span class="micon bi bi-house"></span><span class="mtext">Dashboard</span>
                         </a>
-                        <ul class="submenu">
-                            <li><a href="index.html">Data Artikel</a></li>
-                        </ul>
                     </li>
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle">
-                            <span class="micon bi bi-textarea-resize"></span><span class="mtext">Forms</span>
+                            <span class="micon bi bi-textarea-resize"></span><span class="mtext">Data Website</span>
                         </a>
                         <ul class="submenu">
-                            <li><a href="form-basic.html">Form Basic</a></li>
-                            <li>
-                                <a href="advanced-components.html">Advanced Components</a>
-                            </li>
-                            <li><a href="form-wizard.html">Form Wizard</a></li>
-                            <li><a href="html5-editor.html">HTML5 Editor</a></li>
-                            <li><a href="form-pickers.html">Form Pickers</a></li>
-                            <li><a href="image-cropper.html">Image Cropper</a></li>
-                            <li><a href="image-dropzone.html">Image Dropzone</a></li>
+                            <li><a href="{{ route('article.index') }}">Data Artikel</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -155,6 +144,7 @@
     <script src="{{ asset('assets-admin/src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('assets-admin/src/plugins/datatables/js/pdfmake.min.js') }}"></script>
     <script src="{{ asset('assets-admin/src/plugins/datatables/js/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('assets-admin/src/plugins/tinymce/tinymce.min.js') }}"></script>
     <!-- Datatable Setting js -->
     <script src="{{ asset('assets-admin/vendors/scripts/datatable-setting.js') }}"></script>
     <!-- Google Tag Manager (noscript) -->
