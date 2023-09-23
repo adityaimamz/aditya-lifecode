@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', [BlogController::class, 'index']);
 
 Route::get('/', function () {
-    $articles = Article::paginate(1); // Mengambil 10 item per halaman
+    $articles = Article::paginate(10); // Mengambil 10 item per halaman
     return view('blog', ['articles' => $articles]);
 });
 
