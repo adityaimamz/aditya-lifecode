@@ -54,7 +54,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
                     <a href="/" class="nav-item nav-link {{ $title === 'Dashboard' ? 'active' : '' }}">Home</a>
-                    <a href="/blog" class="nav-item nav-link {{ $title === 'Blog' ? 'active' : '' }}">Blog</a>
+                    <a href="/blog" class="nav-item nav-link {{ $title === 'Blog' ? 'active' : '' }}">Artikel</a>
                 </div>
             </div>
         </nav>
