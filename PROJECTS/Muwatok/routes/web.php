@@ -3,6 +3,7 @@
 use App\Http\Controllers\articleController;
 use App\Http\Controllers\auth\LoginController;
 use App\Models\article;
+use App\Models\dashboard;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,14 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-// Route::get('/', [BlogController::class, 'index']);
-
 Route::get('/', function () {
+    $dashboard = Dashboard::all();
+    return view('index', ['dashboard' => $dashboard]);
+});
+
+Route::get('/blog', function () {
     $articles = Article::paginate(10); // Mengambil 10 item per halaman
     return view('blog', ['articles' => $articles]);
 });
 
-Route::get('/detail/{slug}', function ($slug) {
+Route::get('/blog/detail/{slug}', function ($slug) {
     $article = article::where('slug', $slug)->first();
     $articles = article::all();
     return view('detail-article', [
