@@ -8,7 +8,7 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-12">
                             <div class="title">
-                                <h4>Tambah Artikel</h4>
+                                <h4>Edit Artikel</h4>
                             </div>
                             <nav aria-label="breadcrumb" role="navigation">
                                 <ol class="breadcrumb">
@@ -34,7 +34,7 @@
                 <div class="pd-20 card-box mb-20">
                     <div class="clearfix">
                         <div class="pull-left">
-                            <h4 class="text-blue h4">Tambahkan Data Artikel</h4>
+                            <h4 class="text-blue h4">Edit Data Artikel</h4>
                         </div>
                         <div class="pull-right">
                         </div>

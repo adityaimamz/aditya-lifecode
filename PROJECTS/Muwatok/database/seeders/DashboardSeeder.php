@@ -16,10 +16,10 @@ class DashboardSeeder extends Seeder
         Dashboard::create([
             'herosubtitle' => 'Welcome',
             'herotitle' => 'Website Dr. Cahyo Budi Utomo, M.Pd',
-            'heroimage' => 'Gambar_Article/carousel-1.jpg',
+            'heroimage' => 'Gambar_Hero/carousel-1.jpg',
             'abouttitle' => 'Dr. Cahyo Budi Utomo, M.Pd',
             'abouttext' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, natus.',
-            'aboutimage' => 'Gambar_Article/about.jpg',
+            'aboutimage' => 'Gambar_About/about.jpg',
             'contacttitle' => 'Hubungi saya',
             'email' => 'Km2bP@example.com',
             'phone' => '08123456789',

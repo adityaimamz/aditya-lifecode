@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\articleController;
 use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\DashboardController;
 use App\Models\article;
 use App\Models\dashboard;
 use Illuminate\Support\Facades\Route;
@@ -19,12 +20,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $dashboard = Dashboard::all();
-    return view('index', ['dashboard' => $dashboard]);
+    return view('index', ['dashboard' => $dashboard, 'title' => 'Dashboard']);
 });
 
 Route::get('/blog', function () {
     $articles = Article::paginate(10); // Mengambil 10 item per halaman
-    return view('blog', ['articles' => $articles]);
+    return view('blog', ['articles' => $articles, 'title' => 'Blog']);
 });
 
 Route::get('/blog/detail/{slug}', function ($slug) {
@@ -45,6 +46,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         return view('admin.dashboard');
     });
     Route::resource('article', articleController::class);
+    Route::resource('dashboard', DashboardController::class);
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');

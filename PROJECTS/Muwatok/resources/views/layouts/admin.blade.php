@@ -93,11 +93,8 @@
 
     <div class="left-side-bar">
         <div class="brand-logo">
-            <a href="index.html">
-                <img src="{{ asset('assets-admin/vendors/images/deskapp-logo.svg') }}" alt=""
-                    class="dark-logo" />
-                <img src="{{ asset('assets-admin/vendors/images/deskapp-logo-white.svg') }}" alt=""
-                    class="light-logo" />
+            <a href="/" class="navbar-brand p-0">
+                <h3 class="ml-5 d-flex justify-content-center">CBU Admin</h3>
             </a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">
                 <i class="ion-close-round"></i>
@@ -117,6 +114,7 @@
                         </a>
                         <ul class="submenu">
                             <li><a href="{{ route('article.index') }}">Data Artikel</a></li>
+                            <li><a href="{{ route('dashboard.index') }}">Data Dashboard</a></li>
                         </ul>
                     </li>
                 </ul>
