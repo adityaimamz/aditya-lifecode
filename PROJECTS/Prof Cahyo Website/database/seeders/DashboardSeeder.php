@@ -22,8 +22,8 @@ class DashboardSeeder extends Seeder
             'aboutimage' => 'Gambar_About/about.jpg',
             'contacttitle' => 'Hubungi saya',
             'email' => 'Km2bP@example.com',
-            'phone' => '08123456789',
-            'address' => 'Unniversitas Negeri Semarang'
+            'phone' => '08xxxxxxxxxx',
+            'address' => 'Universitas Negeri Semarang'
         ]);
     }
 }
