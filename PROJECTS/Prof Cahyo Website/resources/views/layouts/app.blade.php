@@ -53,17 +53,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="/" class="nav-item nav-link {{ $title === 'Dashboard' ? 'active' : '' }}">Home</a>
+                    <a href="/" class="nav-item nav-link {{ $title === 'Dashboard' ? 'active' : '' }}">Beranda</a>
+                    <a href="#about"
+                        class="nav-item nav-link {{ $title === 'Dashboard' && request()->is('about') ? 'active' : '' }}">Tentang</a>
+                    <a href="#contact"
+                        class="nav-item nav-link {{ $title === 'Dashboard' && request()->is('contact') ? 'active' : '' }}">Kontak</a>
                     <a href="/blog" class="nav-item nav-link {{ $title === 'Blog' ? 'active' : '' }}">Artikel</a>
                 </div>
             </div>
         </nav>
 
 
-    @yield('content')
+        @yield('content')
 
 
-    {{-- <!-- Footer Start -->
+        {{-- <!-- Footer Start -->
     <div class="container-fluid bg-dark text-light mt-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row gx-5">
@@ -176,22 +180,22 @@
     <!-- Footer End --> --}}
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i
-            class="bi bi-arrow-up"></i></a>
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i
+                class="bi bi-arrow-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
-    <script src="{{ asset('lib/easing/easing.min.js')}}"></script>
-    <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
-    <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
-    <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
+        <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
+        <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
+        <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
+        <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
 
-    <!-- Template Javascript -->
-    <script src="{{ asset('js/main.js') }}"></script>
+        <!-- Template Javascript -->
+        <script src="{{ asset('js/main.js') }}"></script>
 </body>
 
 </html>
