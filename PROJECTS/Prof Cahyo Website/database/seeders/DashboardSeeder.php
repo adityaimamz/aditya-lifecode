@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\dashboard;
+use Illuminate\Database\Seeder;
 
 class DashboardSeeder extends Seeder
 {
@@ -14,16 +13,14 @@ class DashboardSeeder extends Seeder
     public function run(): void
     {
         Dashboard::create([
-            'herosubtitle' => 'Welcome',
-            'herotitle' => 'Website Dr. Cahyo Budi Utomo, M.Pd',
-            'heroimage' => 'Gambar_Hero/carousel-1.jpg',
+            'herosubtitle' => 'Lorem ipsum dolor sit amet elit. Aliquam odio dolor, id luctus erat sagittis non. Ut blandit semper pretium.',
             'abouttitle' => 'Dr. Cahyo Budi Utomo, M.Pd',
             'abouttext' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, natus.',
             'aboutimage' => 'Gambar_About/about.jpg',
             'contacttitle' => 'Hubungi saya',
             'email' => 'Km2bP@example.com',
             'phone' => '08xxxxxxxxxx',
-            'address' => 'Universitas Negeri Semarang'
+            'address' => 'Universitas Negeri Semarang',
         ]);
     }
 }
