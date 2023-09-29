@@ -11,24 +11,34 @@ import {
   redux,
   tailwind,
   nodejs,
-  mongodb,
+  laravel,
+  php,
+  next,
+  bootstrap,
   git,
   figma,
-  docker,
-  meta,
   dicoding,
   stp,
   persagi,
-  carrent,
-  jobit,
-  tripguide,
-  threejs,
+  momong,
+  persagikarawang,
+  incubator,
+  sotopanaz,
+  okta,
 } from "../assets";
 
 export const navLinks = [
   {
+    id: "hero",
+    title: "Home",
+  },
+  {
     id: "about",
     title: "About",
+  },
+  {
+    id: "experience",
+    title: "Experience",
   },
   {
     id: "work",
@@ -93,14 +103,6 @@ const technologies = [
     icon: nodejs,
   },
   {
-    name: "MongoDB",
-    icon: mongodb,
-  },
-  {
-    name: "Three JS",
-    icon: threejs,
-  },
-  {
     name: "git",
     icon: git,
   },
@@ -109,8 +111,20 @@ const technologies = [
     icon: figma,
   },
   {
-    name: "docker",
-    icon: docker,
+    name: "laravel",
+    icon: laravel,
+  },
+  {
+    name: "Php",
+    icon: php,
+  },
+  {
+    name: "Next JS",
+    icon: next,
+  },
+  {
+    name: "Bootstrap",
+    icon: bootstrap,
   },
 ];
 
@@ -180,58 +194,41 @@ const testimonials = [
   {
     testimonial:
       "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
-    name: "Sara Lee",
-    designation: "CFO",
-    company: "Acme Co",
-    image: "https://randomuser.me/api/portraits/women/4.jpg",
-  },
-  {
-    testimonial:
-      "I've never met a web developer who truly cares about their clients' success like Rick does.",
-    name: "Chris Brown",
-    designation: "COO",
-    company: "DEF Corp",
-    image: "https://randomuser.me/api/portraits/men/5.jpg",
-  },
-  {
-    testimonial:
-      "After Rick optimized our website, our traffic increased by 50%. We can't thank them enough!",
-    name: "Lisa Wang",
-    designation: "CTO",
-    company: "456 Enterprises",
-    image: "https://randomuser.me/api/portraits/women/6.jpg",
+    name: "Okta Nora",
+    designation: "Stundent",
+    company: "Unnes",
+    image: okta,
   },
 ];
 
 const projects = [
   {
-    name: "Car Rent",
-    description:
-      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
+    name: "Momong Parenting",
+    description: `Parenting and consultation website was established as a project for Dicoding's Batch 3 Independent Study, emphasizing the significance of effective parenting for optimal child growth. Utilizing the Laravel framework and Bootstrap, it aims to educate and assist parents in fostering ideal environments for their children's development.`,
     tags: [
       {
-        name: "react",
+        name: "laravel",
         color: "blue-text-gradient",
       },
       {
-        name: "mongodb",
+        name: "mysql",
         color: "green-text-gradient",
       },
       {
-        name: "tailwind",
+        name: "bootstrap",
         color: "pink-text-gradient",
       },
     ],
-    image: carrent,
-    source_code_link: "https://github.com/",
+    image: momong,
+    source_code_link: "https://github.com/adityaimamz/Capstone-C22-030",
   },
   {
-    name: "Job IT",
+    name: "Incubator Solotechnopark",
     description:
-      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "The Company Profile for the Incubator training institution is a program for mentoring SMEs and Start-Ups, aimed at strengthening their competitiveness and fostering the formation of startups in Solo City. Built using the Next.js framework and Tailwind CSS",
     tags: [
       {
-        name: "react",
+        name: "nextjs",
         color: "blue-text-gradient",
       },
       {
@@ -239,33 +236,55 @@ const projects = [
         color: "green-text-gradient",
       },
       {
-        name: "scss",
+        name: "tailwindcss",
         color: "pink-text-gradient",
       },
     ],
-    image: jobit,
-    source_code_link: "https://github.com/",
+    image: incubator,
+    source_code_link: "https://github.com/adityaimamz/incubator.solotechnopark",
   },
   {
-    name: "Trip Guide",
+    name: "Persagi Karawang",
     description:
-      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
+      "Persagi Company Profile website is an online platform that showcases the profile, contact details, and information regarding the DPC Persagi Karawang. Additionally, it incorporates useful features such as a Body Mass Index calculator and consultation features for the community. The website is developed using Laravel and Bootstrap.",
     tags: [
       {
-        name: "nextjs",
+        name: "laravel",
         color: "blue-text-gradient",
       },
       {
-        name: "supabase",
+        name: "mysql",
         color: "green-text-gradient",
       },
       {
-        name: "css",
+        name: "bootstrap",
         color: "pink-text-gradient",
       },
     ],
-    image: tripguide,
-    source_code_link: "https://github.com/",
+    image: persagikarawang,
+    source_code_link: "https://github.com/adityaimamz/Persagi-company-profile",
+  },
+  {
+    name: "Soto Panaz",
+    description:
+      "Solo Technopark Analyzer is a data management information system designed for handling data within Solo Technopark. Developed using PHP and Bootstrap.",
+    tags: [
+      {
+        name: "PHP",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "mysql",
+        color: "green-text-gradient",
+      },
+      {
+        name: "bootstrap",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: sotopanaz,
+    source_code_link:
+      "https://github.com/adityaimamz/Sistem-Informasi-Keuangan-SOLOTECNHOPARK",
   },
 ];
 
