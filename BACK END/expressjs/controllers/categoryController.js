@@ -1,42 +1,41 @@
 const { Category } = require("../models");
 
 exports.getAllCategories = async (req, res) => {
- 
-try {
+  try {
     const categories = await Category.findAll();
     return res.status(200).json({
-        status: "Success",
-        data: categories
-    })
-} catch (error) {
+      status: "Success",
+      data: categories,
+    });
+  } catch (error) {
     return res.status(500).json({
-        status: "Fail",
-        error: "Server Error",
-    })
-}   
+      status: "Fail",
+      error: "Server Error",
+    });
+  }
 };
 
 exports.detailCategory = async (req, res) => {
-    try {
-        const id = req.params.id
-        const category = await Category.findByPk(id);
-        if(!category){
-            return res.status(404).json({
-                status: "Fail",
-                error: "Category not found",
-            })
-        }
-        return res.status(200).json({
-            status: "Success",
-            data: category
-        })
-    } catch (error) {
-        return res.status(500).json({
-            status: "Fail",
-            error: "Server Error",
-        })
+  try {
+    const id = req.params.id;
+    const category = await Category.findByPk(id);
+    if (!category) {
+      return res.status(404).json({
+        status: "Fail",
+        error: "Category not found",
+      });
     }
-}
+    return res.status(200).json({
+      status: "Success",
+      data: category,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "Fail",
+      error: "Server Error",
+    });
+  }
+};
 
 exports.storeCategory = async (req, res) => {
   try {
@@ -67,20 +66,43 @@ exports.updateCategory = async (req, res) => {
       },
     });
     const updatedCategory = await Category.findByPk(id);
-    if(!updatedCategory){
-        return res.status(404).json({
-            status: "Fail",
-            error: "Category not found",
-        })
+    if (!updatedCategory) {
+      return res.status(404).json({
+        status: "Fail",
+        error: "Category not found",
+      });
     }
     return res.status(200).json({
-        status: "Success",
-        data: updatedCategory,
-    })
+      status: "Success",
+      data: updatedCategory,
+    });
   } catch (error) {
     return res.status(500).json({
       status: "Fail",
       error: error.errors,
     });
   }
-}
+};
+
+exports.deleteCategory = async (req, res) => {
+  const id = req.params.id;
+  const idCategory = await Category.findByPk(id);
+
+  if (!idCategory) {
+    return res.status(404).json({
+      status: "Fail",
+      error: "Category not found",
+    });
+  }
+
+  await Category.destroy({
+    where: {
+      id: id,
+    },
+  });
+
+  return res.status(200).json({
+    status: "Success",
+    message: `Category with id ${id} deleted`,
+  });
+};
