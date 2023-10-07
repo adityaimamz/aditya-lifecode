@@ -1,40 +1,59 @@
+const { Category } = require("../models");
+
 exports.getAllCategories = async (req, res) => {
-    res.status(200).json({
-        message: "Success",
-        data: [
-            {
-                id: 1,
-                name: "Makanan",
-            },
-            {
-                id: 2,
-                name: "Minuman",
-            },
-            {
-                id: 3,
-                name: "Desert",
-            },
-        ],
+ 
+try {
+    const categories = await Category.findAll();
+    return res.status(200).json({
+        status: "Success",
+        data: categories
     })
+} catch (error) {
+    return res.status(500).json({
+        status: "Fail",
+        error: "Server Error",
+    })
+}   
+};
+
+exports.detailCategory = async (req, res) => {
+    try {
+        const id = req.params.id
+        const category = await Category.findByPk(id);
+        if(!category){
+            return res.status(404).json({
+                status: "Fail",
+                error: "Category not found",
+            })
+        }
+        return res.status(200).json({
+            status: "Success",
+            data: category
+        })
+    } catch (error) {
+        return res.status(500).json({
+            status: "Fail",
+            error: "Server Error",
+        })
+    }
 }
 
 exports.storeCategory = async (req, res) => {
-    let name = req.body.name;
-    let description = req.body.description;
+  try {
+    const { name, description } = req.body;
 
-    if(!name && !description) {
-        return res.status(400).json({
-           status: "failed",
-           error: "Please provide name and description"
-        })
-    }
-
-    return res.status(200).json({
-        status: "success",
-        message: "Category created",
-        data: {
-            name,
-            description
-        }
-    })
-}
+    const newCategory = await Category.create({
+      name,
+      description,
+    });
+    res.status(201).json({
+      status: "Success",
+      data: newCategory,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      status: "Fail",
+      error: error.errors,
+    });
+  }
+};
