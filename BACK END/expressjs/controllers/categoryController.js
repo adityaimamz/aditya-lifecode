@@ -57,3 +57,30 @@ exports.storeCategory = async (req, res) => {
     });
   }
 };
+
+exports.updateCategory = async (req, res) => {
+  try {
+    const id = req.params.id;
+    await Category.update(req.body, {
+      where: {
+        id: id,
+      },
+    });
+    const updatedCategory = await Category.findByPk(id);
+    if(!updatedCategory){
+        return res.status(404).json({
+            status: "Fail",
+            error: "Category not found",
+        })
+    }
+    return res.status(200).json({
+        status: "Success",
+        data: updatedCategory,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      status: "Fail",
+      error: error.errors,
+    });
+  }
+}
