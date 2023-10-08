@@ -2,13 +2,17 @@ const { User } = require("../models");
 
 exports.registerUser = async (req, res) => {
   try {
-    let { name, email, password, passwordConfirm } = req.body;
-    if (password !== passwordConfirm) {
+    if (req.body.password !== req.body.passwordConfirm) {
       return res.status(400).json({
-        message: "Password does not match",
+        message: "Error Validation",
+        error: ["Password not match"]
       });
     }
-    const newUser = await User.create({ name, email, password });
+    const newUser = await User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+    });
     return res.status(201).json({
       message: "Register success",
       data: newUser,
@@ -17,7 +21,7 @@ exports.registerUser = async (req, res) => {
     console.log(error);
     return res.status(400).json({
       message: "Register failed",
-      error,
+      error: error.errors.map((err) => err.message),
     });
   }
 };
