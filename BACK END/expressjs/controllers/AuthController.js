@@ -29,6 +29,7 @@ exports.registerUser = async (req, res) => {
       data: newUser,
     });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({
       message: "Register failed",
       error: error.errors.map((err) => err.message),
