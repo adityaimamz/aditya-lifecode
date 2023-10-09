@@ -7,6 +7,28 @@ const signToken = (id) => {
   });
 };
 
+const createSendTOken = (user, statusCode, res) => {
+  const token = signToken(user.id);
+
+  const cookieOption = {
+    expire: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+  res.cookie("jwt", token, cookieOption);
+
+  user.password = undefined;
+
+  res.status(statusCode).json({
+    status: "success",
+    token,
+    data: {
+      user,
+    },
+  });
+};
+
 exports.registerUser = async (req, res) => {
   try {
     if (req.body.password !== req.body.passwordConfirm) {
@@ -21,13 +43,7 @@ exports.registerUser = async (req, res) => {
       password: req.body.password,
     });
 
-    const token = signToken(newUser.id);
-
-    return res.status(201).json({
-      message: "Register success",
-      token,
-      data: newUser,
-    });
+    createSendTOken(newUser, 201, res);
   } catch (error) {
     console.log(error);
     return res.status(400).json({
@@ -56,10 +72,5 @@ exports.loginUser = async (req, res) => {
       error: "Invalid Email or Password",
     });
   }
-  const token = signToken(userData.id);
-  return res.status(200).json({
-    status: "Success",
-    message: "Login success",
-    token,
-  });
+  createSendTOken(userData, 200, res);
 };
