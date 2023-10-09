@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { User } = require("../models");
+const { User, Role } = require("../models");
 
 exports.authMiddleware = async (req, res, next) => {
   // 1.fungsi di jika di header kita masukan token atau tidak
@@ -33,7 +33,31 @@ exports.authMiddleware = async (req, res, next) => {
 
   // 3. ambil data user berdasarkan kondisi decoded
   const currentUser = await User.findByPk(decoded.id);
+  if(!currentUser) {
+    return next(
+      res.status(401).json({
+        status: 401,
+        message: "User terhapus token tidak bisa digunakan",
+      })
+    );
+  }
   //   console.log(currentUser);
-  req.user;
+  req.user = currentUser;
   next();
 };
+
+exports.permissionUser = (...roles) => {
+  return async(req, res, next) => {
+    const rolesData = await Role.findByPk(req.user.role_id)
+    const roleName = rolesData.name
+
+    if(!roles.includes(roleName)) {
+      return next(res.status(403).json({
+        status: 403,
+        error: "User dont have a permission"
+      }))
+    }
+
+    next()
+  }
+}
