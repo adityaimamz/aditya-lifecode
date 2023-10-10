@@ -20,13 +20,13 @@ router.get("/", getAllCategories);
 router.get("/:id", authMiddleware, detailCategory);
 
 //Update data
-router.put("/:id", permissionUser("Admin"), updateCategory);
+router.put("/:id",authMiddleware, permissionUser("Admin"), updateCategory);
 
 //Create data
-router.post("/", permissionUser("Admin"), storeCategory);
+router.post("/",authMiddleware, permissionUser("Admin"), storeCategory);
 
 //Delete data
-router.delete("/:id", permissionUser("Admin"), deleteCategory);
+router.delete("/:id",authMiddleware, permissionUser("Admin"), deleteCategory);
 
 router.get("/:nama", (req, res) => {
   res.send(`ini endpoint dari route params ${req.params.nama}`);

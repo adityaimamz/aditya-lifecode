@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       validate: {
         notNull: {
-          msg: 'Category is required'
+          msg: 'inputan data name kategori tidak boleh kosong'
         }
       },
     },

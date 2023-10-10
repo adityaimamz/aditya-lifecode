@@ -1,4 +1,5 @@
 const { Category } = require("../models");
+const asyncHandle = require("../middleware/asyncHandler");
 
 exports.getAllCategories = async (req, res) => {
   try {
@@ -37,8 +38,7 @@ exports.detailCategory = async (req, res) => {
   }
 };
 
-exports.storeCategory = async (req, res) => {
-  try {
+exports.storeCategory = asyncHandle (async (req, res) => {
     const { name, description } = req.body;
 
     const newCategory = await Category.create({
@@ -49,40 +49,26 @@ exports.storeCategory = async (req, res) => {
       status: "Success",
       data: newCategory,
     });
-  } catch (error) {
-    return res.status(400).json({
-      status: "Fail",
-      error: error.errors,
-    });
-  }
-};
+});
 
-exports.updateCategory = async (req, res) => {
-  try {
-    const id = req.params.id;
-    await Category.update(req.body, {
-      where: {
-        id: id,
-      },
-    });
-    const updatedCategory = await Category.findByPk(id);
-    if (!updatedCategory) {
-      return res.status(404).json({
-        status: "Fail",
-        error: "Category not found",
-      });
-    }
-    return res.status(200).json({
-      status: "Success",
-      data: updatedCategory,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      status: "Fail",
-      error: error.errors,
-    });
+exports.updateCategory = asyncHandle(async (req, res) => {
+  const id = req.params.id;
+  await Category.update(req.body, {
+    where: {
+      id: id,
+    },
+  });
+  const updatedCategory = await Category.findByPk(id);
+  if (!updatedCategory) {
+    res.status(404);
+    throw new Error("Category not found");
   }
-};
+
+  return res.status(200).json({
+    status: "Success",
+    data: updatedCategory,
+  });
+});
 
 exports.deleteCategory = async (req, res) => {
   const id = req.params.id;

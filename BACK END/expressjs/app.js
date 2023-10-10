@@ -6,16 +6,22 @@ const cors = require('cors');
 const CategoriesRouter = require('./routes/categories');
 const AuthRouter = require('./routes/AuthRouter');
 const morgan = require('morgan');
+const {errorHandler, notFound} = require('./middleware/errorMiddleware');
 
 dotenv.config();
 
-
+//middleware
 app.use(express.json())
 app.use(morgan('dev'));
 app.use(cors());
 
+//routing
 app.use('/api/v1/categories', CategoriesRouter);
 app.use('/api/v1/auth', AuthRouter);
+
+app.use(notFound)
+app.use(errorHandler);
+
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
