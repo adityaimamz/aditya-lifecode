@@ -22,7 +22,6 @@ const createSendTOken = (user, statusCode, res) => {
 
   res.status(statusCode).json({
     status: "success",
-    token,
     data: {
       user,
     },
@@ -74,3 +73,14 @@ exports.loginUser = async (req, res) => {
   }
   createSendTOken(userData, 200, res);
 };
+
+exports.logoutUser = async (req, res) => {
+  res.cookie("jwt", "", {
+    expires: new Date(0),
+    httpOnly: true,
+  });
+
+  res.status(200).json({
+    message: "Logout Success",
+  })
+}

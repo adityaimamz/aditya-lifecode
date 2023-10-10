@@ -6,12 +6,14 @@ const cors = require('cors');
 const CategoriesRouter = require('./routes/categories');
 const AuthRouter = require('./routes/AuthRouter');
 const morgan = require('morgan');
+const cookieParse = require('cookie-parser');
 const {errorHandler, notFound} = require('./middleware/errorMiddleware');
 
 dotenv.config();
 
 //middleware
 app.use(express.json())
+app.use(cookieParse());
 app.use(morgan('dev'));
 app.use(cors());
 
