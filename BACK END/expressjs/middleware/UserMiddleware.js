@@ -12,12 +12,12 @@ exports.authMiddleware = async (req, res, next) => {
   // }
 
   token = req.cookies.jwt
-  
+
   if (!token) {
     return next(
       res.status(401).json({
         status: 401,
-        message: "Unauthorized",
+        message: "you are not logged in",
       })
     );
   }
