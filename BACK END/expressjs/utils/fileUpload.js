@@ -16,9 +16,8 @@ const storageFile = multer.diskStorage({
         cb(uploadError, 'public/uploads')
     },
     filename: function (req, file, cb) {
-        const fileName = file.originalname.split(' ').join('-')
         const extension = FILE_TYPE[file.mimetype]
-        const uniqueFileImage = fileName + "-" + Date.now() + '.' + extension
+        const uniqueFileImage = `image-${Date.now()}.${extension}`
         
         cb(null, uniqueFileImage)
     }

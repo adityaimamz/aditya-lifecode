@@ -1,5 +1,6 @@
 const asyncHandler = require("../middleware/asyncHandler");
 const { Product } = require("../models");
+const fs = require("fs");
 
 exports.addProduct = asyncHandler(async (req, res) => {
   let { name, description, price, categoryId, stock } = req.body;
@@ -48,6 +49,57 @@ exports.detailProduct = asyncHandler(async (req, res) => {
   }
 
   return res.status(200).json({
+    data: productData,
+  });
+});
+
+exports.updateProduct = asyncHandler(async (req, res) => {
+  // request params & body
+  const idParams = req.params.id;
+  let { name, description, price, categoryId, stock } = req.body;
+
+  //get data by ID
+  const productData = await Product.findByPk(idParams);
+
+  //condition if product not found
+  if (!productData) {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+
+  // req file
+  const file = req.file;
+
+  //condition if image file changed
+  if (file) {
+    const imageName = productData.image.replace(
+      `${req.protocol}://${req.get("host")}/public/uploads/`,
+      ""
+    );
+    const pathFileImage = `./public/uploads/${imageName}`;
+    fs.unlinkSync(pathFileImage, (err) => {
+      res.status(400);
+      throw new Error("Image not found");
+    });
+
+    const fileName = file.filename;
+    const pathImage = `${req.protocol}://${req.get(
+      "host"
+    )}/public/uploads/${fileName}`;
+
+    productData.image = pathImage;
+  }
+
+  productData.name = name;
+  productData.description = description;
+  productData.price = price;
+  productData.categoryId = categoryId;
+  productData.stock = stock;
+
+  productData.save();
+
+  return res.status(200).json({
+    message: "Product updated",
     data: productData,
   });
 });

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {addProduct, readProduct, detailProduct} = require('../controllers/productController');
+const {addProduct, readProduct, detailProduct, updateProduct} = require('../controllers/productController');
 const {uploadOption} = require("../utils/fileUpload");
 
 //Tambah Product
@@ -12,7 +12,11 @@ router.post('/', uploadOption.single(`image`), addProduct);
 router.get("/", readProduct)
 
 // Detail Product
-//endpoint = GET api/v1/product/idUUID
+//endpoint = GET api/v1/product/id
 router.get("/:id", detailProduct)
+
+// Update Product
+//endpoint = PUT api/v1/product/id
+router.put("/:id", uploadOption.single(`image`), updateProduct);
 
 module.exports = router;
