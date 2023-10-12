@@ -29,3 +29,25 @@ exports.addProduct = asyncHandler(async (req, res) => {
     data: newProduct,
   });
 });
+
+exports.readProduct = asyncHandler(async (req, res) => {
+  const products = await Product.findAll();
+
+  return res.status(200).json({
+    data: products,
+  });
+});
+
+exports.detailProduct = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const productData = await Product.findByPk(id);
+
+  if (!productData) {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+
+  return res.status(200).json({
+    data: productData,
+  });
+});

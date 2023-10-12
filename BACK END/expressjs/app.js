@@ -9,6 +9,8 @@ const ProductsRouter = require('./routes/productRouter');
 const morgan = require('morgan');
 const cookieParse = require('cookie-parser');
 const {errorHandler, notFound} = require('./middleware/errorMiddleware');
+const path = require('path');
+
 
 dotenv.config();
 
@@ -18,6 +20,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(cookieParse());
 app.use(morgan('dev'));
 app.use(cors());
+app.use('/public/uploads', express.static(path.join(__dirname + '/public/uploads')));
 
 //routing
 app.use('/api/v1/categories', CategoriesRouter);
