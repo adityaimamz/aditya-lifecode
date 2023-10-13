@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {addProduct, readProduct, detailProduct, updateProduct} = require('../controllers/productController');
+const {addProduct, readProduct, detailProduct, updateProduct, deleteProduct} = require('../controllers/productController');
 const {uploadOption} = require("../utils/fileUpload");
 
 //Tambah Product
@@ -18,5 +18,9 @@ router.get("/:id", detailProduct)
 // Update Product
 //endpoint = PUT api/v1/product/id
 router.put("/:id", uploadOption.single(`image`), updateProduct);
+
+// Delete Product
+//endpoint = DELETE api/v1/product/id
+router.delete("/:id", deleteProduct);
 
 module.exports = router;

@@ -90,11 +90,11 @@ exports.updateProduct = asyncHandler(async (req, res) => {
     productData.image = pathImage;
   }
 
-  productData.name = name;
-  productData.description = description;
-  productData.price = price;
-  productData.categoryId = categoryId;
-  productData.stock = stock;
+  productData.name = name || productData.name;
+  productData.description = description || productData.description;
+  productData.price = price || productData.price;
+  productData.categoryId = categoryId || productData.categoryId;
+  productData.stock = stock || productData.stock;
 
   productData.save();
 
@@ -102,4 +102,34 @@ exports.updateProduct = asyncHandler(async (req, res) => {
     message: "Product updated",
     data: productData,
   });
+});
+
+exports.deleteProduct = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const productData = await Product.findByPk(id);
+
+  if (productData) {
+    const imageName = productData.image.replace(
+      `${req.protocol}://${req.get("host")}/public/uploads/`,
+      ""
+    );
+    const pathFileImage = `./public/uploads/${imageName}`;
+
+    fs.unlinkSync(pathFileImage, (err) => {
+      res.status(400);
+      throw new Error("Image not found");
+    });
+
+    productData.destroy();
+
+    return res.status(200).json({
+      message: "Product deleted",
+    })
+
+  } else {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+
+
 });
