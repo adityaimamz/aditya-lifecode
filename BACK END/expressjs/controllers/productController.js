@@ -1,6 +1,7 @@
 const asyncHandler = require("../middleware/asyncHandler");
 const { Product } = require("../models");
 const fs = require("fs");
+const {Op} = require("sequelize");
 
 exports.addProduct = asyncHandler(async (req, res) => {
   let { name, description, price, categoryId, stock } = req.body;
@@ -32,10 +33,29 @@ exports.addProduct = asyncHandler(async (req, res) => {
 });
 
 exports.readProduct = asyncHandler(async (req, res) => {
-  const products = await Product.findAll();
+
+  const {search} = req.query
+
+  let ProductData = ""
+
+  if(search){
+     const products = await Product.findAll({
+       where:{
+         name:{
+           [Op.like]: "%" + search + "%"
+         }
+       }
+     })
+
+     ProductData = products
+  } else {
+    const products = await Product.findAll();
+    
+    ProductData = products
+  }
 
   return res.status(200).json({
-    data: products,
+    data: ProductData,
   });
 });
 
@@ -130,6 +150,5 @@ exports.deleteProduct = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("Product not found");
   }
-
 
 });
