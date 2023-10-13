@@ -34,22 +34,29 @@ exports.addProduct = asyncHandler(async (req, res) => {
 
 exports.readProduct = asyncHandler(async (req, res) => {
 
-  const {search} = req.query
+  const {search, page, limit} = req.query
 
   let ProductData = ""
 
-  if(search){
-     const products = await Product.findAll({
+  if(search || page || limit){
+    const pageData = page * 1 || 1
+    const limitData = limit * 1 || 9
+    const offsetData = (pageData - 1) * limitData
+    const searchData = search || ""
+
+     const products = await Product.findAndCountAll({
+      limit : limitData,
+      offset : offsetData,
        where:{
          name:{
-           [Op.like]: "%" + search + "%"
+           [Op.like]: "%" + searchData + "%"
          }
        }
      })
 
      ProductData = products
   } else {
-    const products = await Product.findAll();
+    const products = await Product.findAndCountAll();
     
     ProductData = products
   }
