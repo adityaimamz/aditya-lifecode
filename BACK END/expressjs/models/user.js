@@ -5,6 +5,9 @@ const bcrypt = require("bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
+      User.hasOne(models.Profile, {
+        foreignKey: "userId",
+      });
     }
   }
   User.init(

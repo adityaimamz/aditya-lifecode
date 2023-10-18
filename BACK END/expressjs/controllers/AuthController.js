@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Profile } = require("../models");
 const jwt = require("jsonwebtoken");
 
 const signToken = (id) => {
@@ -82,21 +82,31 @@ exports.logoutUser = async (req, res) => {
 
   res.status(200).json({
     message: "Logout Success",
-  })
-}
+  });
+};
 
 exports.getMyUser = async (req, res) => {
-   const currentUser = await User.findByPk(req.user.id);
+  const currentUser = await User.findOne({
+    where: { id: req.user.id },
+    include: [
+      {
+        model: Profile,
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "userId"],
+        },
+      },
+    ],
+    attributes: {
+      exclude: ["createdAt", "updatedAt", "password"],
+    },
+  });
 
-   if(currentUser){
-     return res.status(200).json({
-       id: currentUser.id,
-       name: currentUser.name,
-       email: currentUser.email,
-       role_id: currentUser.role_id
-     });
-   } 
-   return res.status(404).json({
-     message: "User not found"
-   })
-}
+  if (currentUser) {
+    return res.status(200).json({
+      data: currentUser,
+    });
+  }
+  return res.status(404).json({
+    message: "User not found",
+  });
+};
