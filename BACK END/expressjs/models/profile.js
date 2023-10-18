@@ -14,7 +14,47 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Profile.init({
-    age: DataTypes.INTEGER
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
+    },
+    age: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "inputan data age tidak boleh kosong",
+        },
+      }
+    },
+    bio : DataTypes.TEXT,
+    address : {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "inputan data address tidak boleh kosong",
+        },
+      }
+    },
+    image : DataTypes.STRING,
+    userId : {
+      type: DataTypes.UUID,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "inputan data userId tidak boleh kosong",
+        },
+        isExist(value) {
+          return sequelize.models.User.findByPk(value).then((el) => {
+            if (!el) {
+              throw new Error("User not found");
+            }
+          })
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Profile',
