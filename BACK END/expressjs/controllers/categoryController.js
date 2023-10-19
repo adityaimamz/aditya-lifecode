@@ -1,4 +1,4 @@
-const { Category } = require("../models");
+const { Category, Product } = require("../models");
 const asyncHandle = require("../middleware/asyncHandler");
 
 exports.getAllCategories = async (req, res) => {
@@ -19,7 +19,14 @@ exports.getAllCategories = async (req, res) => {
 exports.detailCategory = async (req, res) => {
   try {
     const id = req.params.id;
-    const category = await Category.findByPk(id);
+    const category = await Category.findByPk(id , {
+      include: [
+        {
+          model: Product,
+          attributes: {exclude : ["categoryId"]},
+        }
+      ]
+    });
     if (!category) {
       return res.status(404).json({
         status: "Fail",

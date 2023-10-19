@@ -1,5 +1,5 @@
 const asyncHandler = require("../middleware/asyncHandler");
-const { Product } = require("../models");
+const { Product, Category } = require("../models");
 const fs = require("fs");
 const {Op} = require("sequelize");
 
@@ -51,12 +51,25 @@ exports.readProduct = asyncHandler(async (req, res) => {
          name:{
            [Op.like]: "%" + searchData + "%"
          }
-       }
+       },
+       include: [
+         {
+           model: Category,
+           attributes: {exclude : ["createdAt", "updatedAt","description"]},
+         }
+       ]
      })
 
      ProductData = products
   } else {
-    const products = await Product.findAndCountAll();
+    const products = await Product.findAndCountAll({
+      include: [
+        {
+          model: Category,
+          attributes: {exclude : ["createdAt", "updatedAt","description"]},
+        }
+      ]
+  });
     
     ProductData = products
   }
@@ -68,7 +81,14 @@ exports.readProduct = asyncHandler(async (req, res) => {
 
 exports.detailProduct = asyncHandler(async (req, res) => {
   const id = req.params.id;
-  const productData = await Product.findByPk(id);
+  const productData = await Product.findByPk(id, {
+    include: [
+      {
+        model: Category,
+        attributes: {exclude : ["createdAt", "updatedAt","description"]},
+      }
+    ]
+  });
 
   if (!productData) {
     res.status(404);
