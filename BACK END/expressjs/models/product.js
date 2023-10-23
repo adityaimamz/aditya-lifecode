@@ -71,7 +71,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         defaultValue: 0,
       },
-      countReview: DataTypes.INTEGER,
+      countReview: {
+       type : DataTypes.INTEGER,
+        defaultValue: 0,
+      },
+      avgReview: {
+        type : DataTypes.FLOAT,
+        defaultValue: 0,
+      }
     },
     {
       sequelize,
