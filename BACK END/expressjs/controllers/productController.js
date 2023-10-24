@@ -1,5 +1,5 @@
 const asyncHandler = require("../middleware/asyncHandler");
-const { Product, Category } = require("../models");
+const { Product, Category, Review, User, Profile } = require("../models");
 const fs = require("fs");
 const {Op} = require("sequelize");
 
@@ -86,6 +86,22 @@ exports.detailProduct = asyncHandler(async (req, res) => {
       {
         model: Category,
         attributes: {exclude : ["createdAt", "updatedAt","description"]},
+      },
+      {
+        model: Review,
+        attributes: {exclude : ["productId","userId"]},
+        include: [
+          {
+            model: User,
+            attributes: ["name"],
+            include: [
+              {
+                model: Profile,
+                attributes: ["age","image"],
+              }
+            ]
+          }
+        ]
       }
     ]
   });

@@ -1,5 +1,28 @@
 const asyncHandler = require("../middleware/asyncHandler");
-const { Review } = require("../models");
+const { Review, Product } = require("../models");
+const { Sequelize } = require("sequelize");
+
+const avarageRatingProduct = async (idDataProduct) => {
+  const resReview = await Review.findOne({
+    attributes: [[Sequelize.fn("avg", Sequelize.col("point")), "avarage"]],
+    where: {
+      productId: idDataProduct,
+    },
+  });
+
+  const avarage = Number(resReview.dataValues.avarage);
+
+  await Product.update(
+    {
+      avgReview: avarage,
+    },
+    {
+      where: {
+        id: idDataProduct,
+      },
+    }
+  );
+};
 
 exports.createOrUpdateReview = asyncHandler(async (req, res) => {
   const idUser = req.user.id;
@@ -28,6 +51,11 @@ exports.createOrUpdateReview = asyncHandler(async (req, res) => {
         },
       }
     );
+
+      //tambah nilai 1 di countReview di table profuct
+      await Product.increment({countReview: 1}, {where: {id: idProduct}});
+
+    await avarageRatingProduct(idProduct);
     message = "Review updated";
   } else {
     await Review.create({
@@ -36,6 +64,8 @@ exports.createOrUpdateReview = asyncHandler(async (req, res) => {
       point,
       content,
     });
+    await avarageRatingProduct(idProduct);
+
     message = "Review created";
   }
   return res.status(200).json({

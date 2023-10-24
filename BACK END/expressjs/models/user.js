@@ -8,6 +8,12 @@ module.exports = (sequelize, DataTypes) => {
       User.hasOne(models.Profile, {
         foreignKey: "userId",
       });
+
+      User.belongsToMany(models.Product, {
+        through: 'Review',
+        foreignKey: 'userId',
+        as: 'historyReview',
+      });
     }
   }
   User.init(
@@ -62,8 +68,8 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
     }
   );
-  User.prototype.CorrectPassword = async(reqPassword, passwordDB) => {
-    return await bcrypt.compareSync(reqPassword, passwordDB);
+  User.prototype.CorrectPassword = async function(reqPassword, passwordDB) {
+    return await bcrypt.compare(reqPassword, passwordDB);
   }
   return User;
 };

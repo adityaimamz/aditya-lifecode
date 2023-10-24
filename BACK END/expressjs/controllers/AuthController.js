@@ -1,4 +1,4 @@
-const { User, Profile } = require("../models");
+const { User, Profile, Product, Category } = require("../models");
 const jwt = require("jsonwebtoken");
 
 const signToken = (id) => {
@@ -94,6 +94,19 @@ exports.getMyUser = async (req, res) => {
         attributes: {
           exclude: ["createdAt", "updatedAt", "userId"],
         },
+      },
+      {
+        model: Product,
+        as: "historyReview", // tambahkan as keyword disini
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "categoryId"],
+        },
+        include: [
+          {
+            model: Category,
+            attributes: ["name"],
+          },
+        ],
       },
     ],
     attributes: {
