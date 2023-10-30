@@ -5,6 +5,7 @@ import Image from "next/image";
 import profilePic from "../../public/images/profile/developer-pic-1.png";
 import AnimatedText from "@/component/AnimatedText";
 import Link from "next/link";
+import { ButtonContact, ButtonResume } from "@/component/Button";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,9 +30,9 @@ export default function Home() {
                 projects and articles, showcasing my expertise in React.js and
                 web development.
               </p>
-              <div>
-                <Link href="/dummy.pdf" target="_blank">Resume</Link>
-                <Link href="mailto:adityaimam8@gmail.com">Contact</Link>
+              <div className="flex items-center self-start mt-2">
+                <ButtonResume/>
+                <ButtonContact/>
               </div>
             </div>
           </div>
