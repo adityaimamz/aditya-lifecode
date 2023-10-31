@@ -1,7 +1,9 @@
 import Navbar from "@/component/Navbar";
+import Footer from "@/component/Footer";
 import "@/styles/globals.css";
 import { Montserrat } from "next/font/google";
 import Head from "next/head";
+
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -13,12 +15,12 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${montserrat.variable} font-mont bg-light w-full min-h-screen`}>
         <Navbar/>
         <Component {...pageProps} />
+        <Footer/>
       </main>
     </>
   );
