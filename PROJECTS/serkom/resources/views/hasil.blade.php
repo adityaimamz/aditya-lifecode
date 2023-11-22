@@ -1,7 +1,6 @@
 @extends('layouts/app')
 
 @section('content')
-
     <div class="container-fluid bg-primary py-5 bg-header" style="margin-bottom: 90px;">
         <div class="row py-5">
             <div class="col-12 pt-lg-5 mt-lg-5 text-center">
@@ -43,9 +42,50 @@
                     @endforeach
                 </tbody>
             </table>
-            
+        </div>
+        <div class="container">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Jenis Beasiswa</h5>
+
+                        <!-- Pie Chart -->
+                        <canvas id="pieChart" style="max-height: 400px;"></canvas>
+                        <script>
+                            var akademik = {{ $akademik }}
+                            var nonakademik = {{ $nonakademik }}
+                            console.log(akademik, nonakademik)
+                            document.addEventListener("DOMContentLoaded", () => {
+                                new Chart(document.querySelector('#pieChart'), {
+                                    type: 'pie',
+                                    data: {
+                                        labels: [
+                                            'Akademik',
+                                            'Nonakademik',
+                                        ],
+                                        datasets: [{
+                                            label: 'jenis beasiswa',
+                                            data: [
+                                                akademik,
+                                                nonakademik
+                                            ],
+                                            backgroundColor: [
+                                                'rgb(255, 99, 132)',
+                                                'rgb(54, 162, 235)',
+                                                'rgb(255, 205, 86)'
+                                            ],
+                                            hoverOffset: 4
+                                        }]
+                                    }
+                                });
+                            });
+                        </script>
+                        <!-- End Pie CHart -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @endsection

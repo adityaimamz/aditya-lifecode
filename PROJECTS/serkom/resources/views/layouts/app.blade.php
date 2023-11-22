@@ -2,6 +2,13 @@
 <html lang="en">
 
 <head>
+    <!-- 
+    Deskripsi: Halaman layout utama
+    Initial state: Tidak ada
+    Final state: Semua elemen layout terpasang dengan baik
+    Author: Aditya Imam Zuhdi
+    Versi/Tanggal: 1.0/12 Oktober 2021
+    -->
     <meta charset="utf-8">
     <title>Pendaftaran Beasiswa</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -23,6 +30,7 @@
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
+    
 
 
     <!-- Customized Bootstrap Stylesheet -->
@@ -33,7 +41,13 @@
 </head>
 
 <body>
-    <!-- Spinner Start -->
+    <!-- 
+    Deskripsi: Bagian spinner saat halaman sedang memuat
+    Initial state: Tidak ada
+    Final state: Spinner ditampilkan saat halaman sedang memuat
+    Author: Aditya Imam Zuhdi
+    Versi/Tanggal: 1.0/12 Oktober 2021
+    -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner"></div>
@@ -41,7 +55,13 @@
     <!-- Spinner End -->
 
 
-    <!-- Navbar Start -->
+    <!-- 
+    Deskripsi: Bagian navbar
+    Initial state: Tidak ada
+    Final state: Navbar ditampilkan dengan benar
+    Author: Aditya Imam Zuhdi
+    Versi/Tanggal: 1.0/12 Oktober 2021
+    -->
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
             <a href="/" class="navbar-brand p-0">
@@ -81,6 +101,7 @@
         <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
         <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
         <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('assets-admin/vendor/chart.js/chart.umd.js') }}"></script>
         <script src="{{ asset('assets-admin/src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets-admin/src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
         <script src="{{ asset('assets-admin/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
@@ -93,7 +114,6 @@
         <script src="{{ asset('assets-admin/src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
         <script src="{{ asset('assets-admin/src/plugins/datatables/js/pdfmake.min.js') }}"></script>
         <script src="{{ asset('assets-admin/src/plugins/datatables/js/vfs_fonts.js') }}"></script>
-
         <script src="{{ asset('assets-admin/vendors/scripts/datatable-setting.js') }}"></script>
 
 

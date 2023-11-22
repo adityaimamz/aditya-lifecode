@@ -7,36 +7,73 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\pendaftaran;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Mahasiswa;
 
 
 class PendaftaranController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar pendaftaran beasiswa
+     * 
+     * Initial state: Tidak ada data yang ditampilkan
+     * Final state: Menampilkan halaman pendaftaran dengan data judul, IPK acak, dan daftar NIM
+     * Author: aditya imam zuhdi
+     * Version: 1.0
+     * Date: 2022-10-01
      */
     public function index()
     {
-        // Menampilkan halaman pendaftaran dengan data judul dan IPK acak
+        // Mengambil daftar NIM dari tabel mahasiswa
+        $daftarNIM = Mahasiswa::pluck('nim');
+        $jenisBeasiswaData = pendaftaran::all();
+
+        // Menampilkan halaman pendaftaran dengan data judul, IPK acak, dan daftar NIM
         return view('pendaftaran', [
             'title' => 'Pendaftaran Beasiswa',
-            'ipk' => rand(300, 320) / 100
+            'daftarNIM' => $daftarNIM,
+            'jenisBeasiswaData' => $jenisBeasiswaData
         ]);
-    }
+    }    
+    
+
+/**
+ * Mengambil data mahasiswa berdasarkan NIM
+ *
+ * Initial state: Tidak ada data mahasiswa yang diambil
+ * Final state: Mengembalikan data mahasiswa berdasarkan NIM
+ * Author: aditya imam zuhdi
+ * Version: 1.0
+ * Date: 2022-10-01
+ */
+public function getMahasiswa($nim)
+{
+    $mahasiswa = Mahasiswa::where('nim', $nim)->first();
+
+    return $mahasiswa ? json_encode($mahasiswa) : 'mahasiswa tidak ditemukan';
+}
+
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan data pendaftaran beasiswa ke dalam database
+     * 
+     * Initial state: Tidak ada data pendaftaran beasiswa yang disimpan
+     * Final state: Data pendaftaran beasiswa disimpan ke dalam database
+     * Author: aditya imam zuhdi
+     * Version: 1.0
+     * Date: 2022-10-01
      */
     public function store(Request $request)
     {
         // Validasi data yang diterima dari form
         $validator = Validator::make($request->all(), [
+            'nim' => 'required|numeric',
             'nama' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+            'email' => 'required|email:dns|max:255',
             'nomor_hp' => 'required|numeric',
             'semester' => 'required|numeric|between:1,8',
             'ipk' => 'numeric|min:3', // Memastikan IPK memiliki nilai minimal 3
             'jenis_beasiswa' => 'required|in:akademik,nonakademik',
-            'upload_berkas' => 'required|mimes:pdf,jpg,jpeg,png,zip|max:2048',
+            'upload_berkas' => 'required|mimes:pdf,jpg,jpeg,png,zip',
         ]);
 
         if ($validator->fails()) {
@@ -53,6 +90,7 @@ class PendaftaranController extends Controller
 
         // Menyimpan data pendaftaran beasiswa ke dalam database
         pendaftaran::create([
+            'nim' => $request->nim,
             'nama' => $request->nama,
             'email' => $request->email,
             'nomor_hp' => $request->nomor_hp,
@@ -68,10 +106,17 @@ class PendaftaranController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Menghapus data pendaftaran beasiswa dari database
+     * 
+     * Initial state: Tidak ada data pendaftaran beasiswa yang dihapus
+     * Final state: Data pendaftaran beasiswa dihapus dari database
+     * Author: aditya imam zuhdi
+     * Version: 1.0
+     * Date: 2022-10-01
      */
     public function destroy(string $id)
     {
-        //
+        $pendaftaran = pendaftaran::find($id);
+        $pendaftaran->delete();
     }
 }
