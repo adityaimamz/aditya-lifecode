@@ -16,7 +16,7 @@ class PendaftaranController extends Controller
      * Menampilkan daftar pendaftaran beasiswa
      * 
      * Initial state: Tidak ada data yang ditampilkan
-     * Final state: Menampilkan halaman pendaftaran dengan data judul, IPK acak, dan daftar NIM
+     * Final state: Menampilkan halaman pendaftaran dengan data judul, dan daftar NIM
      * Author: aditya imam zuhdi
      * Version: 1.0
      * Date: 2022-10-01
@@ -27,7 +27,7 @@ class PendaftaranController extends Controller
         $daftarNIM = Mahasiswa::pluck('nim');
         $jenisBeasiswaData = pendaftaran::all();
 
-        // Menampilkan halaman pendaftaran dengan data judul, IPK acak, dan daftar NIM
+        // Menampilkan halaman pendaftaran dengan data judul, dan daftar NIM
         return view('pendaftaran', [
             'title' => 'Pendaftaran Beasiswa',
             'daftarNIM' => $daftarNIM,
