@@ -36,7 +36,8 @@
                         <a href="/hasil">
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ Session::get('success') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
                             </div>
                         </a>
                     @endif
@@ -71,8 +72,7 @@
                             </div>
                             <div class="col-md-12">
                                 <input type="number" class="form-control border-0 bg-light px-4" name="nomor_hp"
-                                    placeholder="Masukan Nomor HP"
-                                    style="height: 55px;">
+                                    placeholder="Masukan Nomor HP" style="height: 55px;">
                                 <div class="errors text-danger" style="font-size: 14px">
                                     {{ $errors->pendaftaran->first('nomor_hp') }}</div>
                             </div>
@@ -90,8 +90,9 @@
                                 <input type="text" class="form-control border-0 bg-light px-4" name="ipk"
                                     id="ipk" value="{{ isset($mahasiswa->ipk) ? $ipk : '' }}"
                                     placeholder="Masukan IPK" style="height: 55px;" readonly>
-                                <div class="errors text-danger" style="font-size: 14px">
-                                    {{ $errors->pendaftaran->first('ipk') }}</div>
+                                <div class="errors text-danger" style="font-size: 14px" hidden id="ipkError">
+                                    IPK dibawah 3, tidak dapat mendaftar beasiswa
+                                </div>
                             </div>
 
                             <div class="col-md-12">
@@ -112,7 +113,10 @@
                                     {{ $errors->pendaftaran->first('upload_berkas') }}</div>
                             </div>
                             <div class="col-12">
-                                <button id="btnDaftar" class="btn btn-primary w-100 py-3" type="submit" disabled>Daftar Beasiswa</button>
+                                <button id="btnDaftar" class="btn btn-primary w-100 py-3" type="submit" disabled>Daftar
+                                    Beasiswa</button>
+                                <button id="btnCancel" class="btn btn-secondary w-100 mt-3 py-3" type="button"
+                                    disabled>Cancel</button>
                             </div>
                         </div>
                     </form>
@@ -145,16 +149,23 @@
                         let jenisBeasiswaInput = document.getElementById("jenisBeasiswa");
                         let upload_berkas = document.getElementById("uploadBerkas");
                         let button = document.getElementById("btnDaftar");
+                        let button_cancel = document.getElementById("btnCancel");
+                        let ipkError = document.getElementById("ipkError");
+
 
                         // Memeriksa apakah IPK kurang dari 3, jika ya, nonaktifkan input jenis beasiswa
                         if (ipkValue < 3) {
+                            ipkError.hidden = false;
                             jenisBeasiswaInput.disabled = true;
                             upload_berkas.disabled = true;
                             button.disabled = true;
+                            button_cancel.disabled = true;
                         } else {
+                            ipkError.hidden = true;
                             jenisBeasiswaInput.disabled = false;
                             upload_berkas.disabled = false;
                             button.disabled = false;
+                            button_cancel.disabled = false;
                         }
                     },
                     error: function(xhr, status, error) {
@@ -162,6 +173,22 @@
                     }
                 });
 
+            });
+            $('#btnCancel').on('click', function() {
+                // Mengosongkan semua input form
+                $('select[name="nim"]').val('');
+                $('input[name="nama"]').val('');
+                $('input[name="ipk"]').val('');
+                $('input[name="email"]').val('');
+                $('input[name="nomor_hp"]').val('');
+                $('select[name="semester"]').val('');
+                $('select[name="jenis_beasiswa"]').val('');
+                $('input[name="upload_berkas"]').val('');
+                // Menonaktifkan input jenis beasiswa, upload berkas, dan tombol daftar
+                document.getElementById("jenisBeasiswa").disabled = true;
+                document.getElementById("uploadBerkas").disabled = true;
+                document.getElementById("btnDaftar").disabled = true;
+                document.getElementById("btnCancel").disabled = true;
             });
         });
     </script>

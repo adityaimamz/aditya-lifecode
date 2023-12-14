@@ -61,7 +61,7 @@
                             <label for="#gambar" class="form-label">Gambar</label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input form-control" id="gambar" name="gambar"
-                                    value="{{ $data->gambar }}" required/>
+                                    value="{{ $data->gambar }}" />
                                 <label class="custom-file-label">Choose file</label>
                             </div>
                         </div>

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('meta_judul');
             $table->text('meta_deskripsi');
             $table->text('konten');
-            $table->text('gambar');
+            $table->text('gambar')->nullable();
             $table->timestamps();
 
         });

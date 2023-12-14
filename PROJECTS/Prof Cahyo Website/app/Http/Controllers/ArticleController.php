@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 use App\Models\article;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -32,21 +31,31 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $path = 'Gambar_Article';
-        $file = $request->file('gambar');
-        Storage::putFileAs($path, $file, $file->getClientOriginalName());
-
-        article::create([
-             'judul' => $request->judul,
+        $path = 'uploads';
+    
+        // Check if a file is uploaded
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $fileName = $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $gambarPath = $path . '/' . $fileName;
+        } else {
+            // Jika tidak ada file yang diunggah, atur $gambarPath menjadi null atau sesuai kebutuhan
+            $gambarPath = null;
+        }
+    
+        Article::create([
+            'judul' => $request->judul,
             'slug' => Str::slug($request->judul, '-'),
             'meta_judul' => $request->meta_judul,
             'meta_deskripsi' => $request->meta_deskripsi,
             'konten' => $request->konten,
-            'gambar' => $path . "/" . $file->getClientOriginalName(),
+            'gambar' => $gambarPath, // Gunakan $gambarPath yang sudah diatur
         ]);
-
+    
         return redirect()->route('article.index');
     }
+    
 
     /**
      * Display the specified resource.
@@ -71,22 +80,37 @@ class ArticleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $path = 'Gambar_Article';
-        $file = $request->file('gambar');
-        Storage::putFileAs($path, $file, $file->getClientOriginalName());
-
+        $path = 'uploads';
+    
+        // Check if a file is uploaded
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $fileName = $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $gambarPath = $path . '/' . $fileName;
+        } else {
+            // Jika tidak ada file yang diunggah, atur $gambarPath menjadi null atau sesuai kebutuhan
+            $gambarPath = null;
+        }
+    
         $data = [
-                        'judul' => $request->judul,
+            'judul' => $request->judul,
             'slug' => Str::slug($request->judul, '-'),
             'meta_judul' => $request->meta_judul,
             'meta_deskripsi' => $request->meta_deskripsi,
             'konten' => $request->konten,
-            'gambar' => $path . "/" . $file->getClientOriginalName(),
         ];
-        $data = article::where('id', $id)->update($data);
-
+    
+        // Hanya atur 'gambar' jika file diunggah
+        if ($gambarPath !== null) {
+            $data['gambar'] = $gambarPath;
+        }
+    
+        Article::where('id', $id)->update($data);
+    
         return redirect()->route('article.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.
