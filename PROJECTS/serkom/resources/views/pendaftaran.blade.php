@@ -32,6 +32,7 @@
             </div>
             <div class="row g-5">
                 <div class="col-lg-12 wow slideInUp" data-wow-delay="0.3s">
+                    <!-- Menampilkan pesan sukses jika ada -->
                     @if (Session::has('success'))
                         <a href="/hasil">
                             <div class="alert alert-success alert-dismissible fade show" role="alert">

@@ -40,7 +40,7 @@ File README.md: File ini, yang berisi penjelasan tentang proyek.
 
 File app.config.js: File yang menentukan konfigurasi untuk aplikasi, seperti nama, versi, dll
 
-library dan Frameroek yang dipasang :
+library dan Framework yang dipasang :
 -Bootstrap
 -Jquery
 -Datatables
