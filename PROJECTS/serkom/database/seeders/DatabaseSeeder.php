@@ -2,32 +2,58 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
-use App\Models\User;
-
-
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
+     *
+     * @return void
      */
-    public function run(): void
+    public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // Bersihkan tabel sebelum menambahkan data baru
+        DB::table('mahasiswas')->delete();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        User::create(
-            [
-                'name' => 'Administrator',
-                'username' => 'admin',
-                'email' => 'admin@gmail.com',
-                'password' => Hash::make('Admin999')
-            ]);
+        // Tambahkan data seeder
+        DB::table('mahasiswas')->insert([
+            'nama' => 'aditya',
+            'nim' => '20102217',
+            'ipk' => 3.5,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('mahasiswas')->insert([
+            'nama' => 'fikri',
+            'nim' => '20102218',
+            'ipk' => 2.9,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('mahasiswas')->insert([
+            'nama' => 'satria',
+            'nim' => '20102219',
+            'ipk' => 3.9,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('mahasiswas')->insert([
+            'nama' => 'nabil',
+            'nim' => '20102220',
+            'ipk' => 2.1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('mahasiswas')->insert([
+            'nama' => 'nanda',
+            'nim' => '20102221',
+            'ipk' => 3.7,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Tambahkan data lainnya sesuai kebutuhan
     }
 }

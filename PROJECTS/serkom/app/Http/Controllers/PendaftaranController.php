@@ -25,13 +25,11 @@ class PendaftaranController extends Controller
     {
         // Mengambil daftar NIM dari tabel mahasiswa
         $daftarNIM = Mahasiswa::pluck('nim');
-        $jenisBeasiswaData = pendaftaran::all();
 
         // Menampilkan halaman pendaftaran dengan data judul, dan daftar NIM
         return view('pendaftaran', [
             'title' => 'Pendaftaran Beasiswa',
             'daftarNIM' => $daftarNIM,
-            'jenisBeasiswaData' => $jenisBeasiswaData
         ]);
     }    
     

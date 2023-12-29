@@ -145,7 +145,6 @@
                         $('input[name="nama"]').val(data.nama);
                         $('input[name="ipk"]').val(data.ipk);
                         ipkValue = data.ipk;
-                        console.log(ipkValue);
                         // Mendapatkan elemen input jenis beasiswa
                         let jenisBeasiswaInput = document.getElementById("jenisBeasiswa");
                         let upload_berkas = document.getElementById("uploadBerkas");

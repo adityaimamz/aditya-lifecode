@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .active {
-    color: #FF8800;
+    @apply text-primary
 }
