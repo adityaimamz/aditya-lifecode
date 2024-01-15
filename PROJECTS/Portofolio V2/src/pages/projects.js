@@ -1,13 +1,13 @@
-import AnimatedText from "@/component/AnimatedText";
-import { GithubIcon } from "@/component/Icon";
-import Layout from "@/component/Layout";
+import AnimatedText from "@/component/Elements/AnimatedText";
+import { GithubIcon } from "@/component/Elements/Icon";
+import Layout from "@/component/Fragments/Layout";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import project1 from "../../public/images/projects/nft-collection-website-cover-image.jpg";
 import { motion } from "framer-motion";
-import Transition from "@/component/Transition";
+import Transition from "@/component/Fragments/Transition";
 
 const FramerImage = motion(Image);
 

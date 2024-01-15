@@ -16,7 +16,6 @@ import {
   next,
   bootstrap,
   git,
-  figma,
   dicoding,
   stp,
   persagi,

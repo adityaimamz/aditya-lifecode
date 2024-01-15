@@ -1,8 +1,8 @@
 import React from "react";
 import Head from "next/head";
-import Layout from "@/component/Layout";
-import AnimatedText from "@/component/AnimatedText";
-import Transition from "@/component/Transition";
+import Layout from "@/component/Fragments/Layout";
+import AnimatedText from "@/component/Elements/AnimatedText";
+import Transition from "@/component/Fragments/Transition";
 
 // const FeaturedArticle = (img,title,time,summary,link) => {
 //     return (
